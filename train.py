@@ -1,27 +1,28 @@
 import gymnasium as gym
 from stable_baselines3 import PPO
+from rl_models.ppo import PPO as myPPO
 from rl_models.reinforce import Reinforce
 import numpy as np
 
 
-#ENV_ID = "CartPole-v1"
+ENV_ID = "CartPole-v1"
 #ENV_ID = "MountainCar-v0"
-ENV_ID = "Acrobot-v1"
+#ENV_ID = "Acrobot-v1"
 env = gym.make(ENV_ID)
 
 # create the model
 
 #model = PPO(policy="MlpPolicy", env=env, verbose=1)
-model = Reinforce(env=env)
+#model = Reinforce(env=env)
+model = myPPO(env=env)
+
 
 
 # train the model
-
-model.learn(total_timesteps=200000)
+model.learn(total_timesteps=204_800)
 
 
 # run the model
-
 watch_env = gym.make(ENV_ID, render_mode="human")
 
 obs, info = watch_env.reset()
